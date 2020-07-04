@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = .5f;
 
+    [SerializeField]
+    private float _vidas = 3;
+    [SerializeField]
+    private GameObject _spawn;
+
     void Start()
     {
         transform.position = new Vector3(0,0,0);
@@ -64,6 +69,18 @@ public class Player : MonoBehaviour
         else if (transform.position.y <= -3.4f)
         {
             transform.position = new Vector3(transform.position.x, -3.4f, 0);
+        }
+    }
+
+    public void SistemaVidas()
+    {
+        _vidas--;
+        Debug.Log(_vidas);
+
+        if (_vidas <= 0)
+        {
+            Destroy(gameObject);
+            _spawn.GetComponent<Spawn>().StopSpawn();
         }
     }
 }
