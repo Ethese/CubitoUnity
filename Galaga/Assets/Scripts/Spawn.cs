@@ -8,19 +8,37 @@ public class Spawn : MonoBehaviour
     private GameObject _enemyPref;
     [SerializeField]
     private GameObject _spawnEnemy;
+    [SerializeField]
+    private GameObject _tripleshotPref;
+    [SerializeField]
+    private GameObject _spawnPowerUps;
     private bool _stopSpawn = true;
 
     void Start()
     {
-        StartCoroutine(SpawnEnemy());   
+        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnPowerUp());
     }
 
     IEnumerator SpawnEnemy()
     {
         while (_stopSpawn)
         {
-            Instantiate(_enemyPref, _spawnEnemy.transform.position, Quaternion.identity);
+            Vector3 spawnPoint = new Vector3(Random.Range(-8f, 8f), 6.5f, 0);
+            GameObject newEnemy = Instantiate(_enemyPref, spawnPoint, Quaternion.identity);
+            newEnemy.transform.parent = _spawnEnemy.transform;
             yield return new WaitForSeconds(5f);
+        }
+    }
+
+    IEnumerator SpawnPowerUp()
+    {
+        while (_stopSpawn)
+        {
+            Vector3 spawnPoint = new Vector3(Random.Range(-8f, 8f), 6.5f, 0);
+            GameObject newPowerup = Instantiate(_tripleshotPref, spawnPoint, Quaternion.identity);
+            newPowerup.transform.parent = _spawnPowerUps.transform;
+            yield return new WaitForSeconds(Random.Range(3, 8));
         }
     }
 

@@ -9,7 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
     private Vector3 _offset = new Vector3(0, .5f, 0);
+    [SerializeField]
+    private Vector3 _offsetTripleshot = new Vector3(0, .5f, 0);
 
     private float _puedeDisparar = -1;
     [SerializeField]
@@ -19,6 +23,9 @@ public class Player : MonoBehaviour
     private float _vidas = 3;
     [SerializeField]
     private GameObject _spawn;
+
+    [SerializeField]
+    private bool _isTripleshotActive = false;
 
     void Start()
     {
@@ -37,7 +44,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _puedeDisparar)
         {
             _puedeDisparar = Time.time + _fireRate;
-            Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
+            if (_isTripleshotActive == true)
+            {
+                Instantiate(_tripleShotPrefab, transform.position + _offsetTripleshot, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
+            }
         }
     }
 
@@ -82,5 +96,17 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             _spawn.GetComponent<Spawn>().StopSpawn();
         }
+    }
+
+    public void ActivarTripleshot()
+    {
+        _isTripleshotActive = true;
+        StartCoroutine(DesactivarTripleshot());
+    }
+
+    IEnumerator DesactivarTripleshot()
+    {
+        yield return new WaitForSeconds(3f);
+        _isTripleshotActive = false;
     }
 }

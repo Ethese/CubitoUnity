@@ -17,7 +17,7 @@ public class Enemigo : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //Si choca con el jugador
         if (other.tag == "Player")
@@ -37,5 +37,4 @@ public class Enemigo : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
