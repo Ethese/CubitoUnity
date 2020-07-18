@@ -383,8 +383,10 @@ MonoBehaviour:
   _enemyPref: {fileID: 8462013593891294588, guid: b598c1a6f1bca9d498c6eca0705c857e,
     type: 3}
   _spawnEnemy: {fileID: 2090593935}
-  _tripleshotPref: {fileID: 193788926935731321, guid: 69fbfb3557b72974d946081a87d807d9,
-    type: 3}
+  _powerUp:
+  - {fileID: 193788926935731321, guid: 69fbfb3557b72974d946081a87d807d9, type: 3}
+  - {fileID: 8238840270326109039, guid: 95ba3b885c28bcb429d0c8bd80618675, type: 3}
+  - {fileID: 8452484259884047880, guid: de2f8a1c56aaa3e41aef48a4841c1bfd, type: 3}
   _spawnPowerUps: {fileID: 351122346}
 --- !u!1 &351122346
 GameObject:

@@ -9,7 +9,7 @@ public class Spawn : MonoBehaviour
     [SerializeField]
     private GameObject _spawnEnemy;
     [SerializeField]
-    private GameObject _tripleshotPref;
+    private GameObject[] _powerUp;
     [SerializeField]
     private GameObject _spawnPowerUps;
     private bool _stopSpawn = true;
@@ -36,7 +36,7 @@ public class Spawn : MonoBehaviour
         while (_stopSpawn)
         {
             Vector3 spawnPoint = new Vector3(Random.Range(-8f, 8f), 6.5f, 0);
-            GameObject newPowerup = Instantiate(_tripleshotPref, spawnPoint, Quaternion.identity);
+            GameObject newPowerup = Instantiate(_powerUp[Random.Range(0,3)], spawnPoint, Quaternion.identity);
             newPowerup.transform.parent = _spawnPowerUps.transform;
             yield return new WaitForSeconds(Random.Range(3, 8));
         }

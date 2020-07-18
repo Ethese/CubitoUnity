@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    [SerializeField]
+    private float _idPowerUp;
     private float _speed = 3f;
     // Start is called before the first frame update
     void Start()
@@ -22,9 +24,20 @@ public class PowerUp : MonoBehaviour
         if (collision.tag == "Player")
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
+            switch (_idPowerUp)
             {
-                player.ActivarTripleshot();
+                case 0:
+                    player.ActivarTripleshot();
+                    break;
+                case 1:
+                    Debug.Log("SPEED ACTIVADO");
+                    break;
+                case 2:
+                    Debug.Log("SHIELD ACTIVADO");
+                    break;
+                default:
+                    Debug.Log("CASO DEFAULT");
+                    break;
             }
             Destroy(gameObject);
         }
