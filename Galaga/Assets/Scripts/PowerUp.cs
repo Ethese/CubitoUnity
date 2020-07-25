@@ -30,10 +30,10 @@ public class PowerUp : MonoBehaviour
                     player.ActivarTripleshot();
                     break;
                 case 1:
-                    Debug.Log("SPEED ACTIVADO");
+                    player.AumentarSpeed();
                     break;
                 case 2:
-                    Debug.Log("SHIELD ACTIVADO");
+                    player.AumentarEscudo();
                     break;
                 default:
                     Debug.Log("CASO DEFAULT");
