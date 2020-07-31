@@ -43,13 +43,7 @@ public class Player : MonoBehaviour
 
     //UI
     [SerializeField]
-    private Text _TextoVidas;
-    [SerializeField]
-    private Text _TextoEscudos;
-    [SerializeField]
-    private GameObject[] _ImagenesVidas;
-    [SerializeField]
-    private GameObject[] _ImagenesEscudos;
+    private UIManager _uIManager;
 
     void Start()
     {
@@ -62,7 +56,6 @@ public class Player : MonoBehaviour
         Limites();
         Disparo();
         ActivarEscudo();
-        UserIterface();
     }
 
     void Disparo()
@@ -122,8 +115,8 @@ public class Player : MonoBehaviour
         }
         _vidas--;
 
-        
-        _ImagenesVidas[Mathf.RoundToInt(_vidas)].SetActive(false);
+
+        _uIManager.ActualizarVidas(Mathf.RoundToInt(_vidas));
 
         Debug.Log(_vidas);
 
@@ -169,7 +162,7 @@ public class Player : MonoBehaviour
         Debug.Log(_cantidadEscudos);
         if (_cantidadEscudos < _cantidadMaximaEscudos)
         {
-            _ImagenesEscudos[Mathf.RoundToInt(_cantidadEscudos)].SetActive(true);
+            _uIManager.AumentarEscudos(Mathf.RoundToInt(_cantidadEscudos));
             _cantidadEscudos++;
         }
     }
@@ -181,14 +174,9 @@ public class Player : MonoBehaviour
             _escudoActivo = true;
             _shield.SetActive(true);
             _cantidadEscudos--;
-            _ImagenesEscudos[Mathf.RoundToInt(_cantidadEscudos)].SetActive(false);
+            _uIManager.ReducirEscudos(Mathf.RoundToInt(_cantidadEscudos));
         }
     }
 
-    void UserIterface()
-    {
-        _TextoVidas.text = "Vidas: " + _vidas;
-        _TextoEscudos.text = "Escudos: " + _cantidadEscudos;
-    }
 
 }
