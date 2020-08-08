@@ -7,6 +7,15 @@ public class Enemigo : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
 
+    private Animator _anim;
+    private CapsuleCollider2D _collider2D;
+
+    private void Start()
+    {
+        _anim = gameObject.GetComponent<Animator>();
+        _collider2D = gameObject.GetComponent<CapsuleCollider2D>();
+    }
+
     void Update()
     {
         transform.Translate(new Vector3(0,-1,0) * _speed * Time.deltaTime);
@@ -26,7 +35,10 @@ public class Enemigo : MonoBehaviour
             if (pl != null)
             {
                 pl.SistemaVidas();
-                Destroy(gameObject);
+                _speed = 0;
+                _collider2D.enabled = false;
+                _anim.SetTrigger("Explode");
+                Destroy(gameObject, 4f);
             }
         }
 
@@ -34,7 +46,10 @@ public class Enemigo : MonoBehaviour
         if (other.tag == "Proyectil")
         {
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            _speed = 0;
+            _collider2D.enabled = false;
+            _anim.SetTrigger("Explode");
+            Destroy(gameObject, 4f);
         }
     }
 }
