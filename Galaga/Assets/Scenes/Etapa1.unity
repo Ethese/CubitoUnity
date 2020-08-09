@@ -261,7 +261,10 @@ MonoBehaviour:
   _uIManager: {fileID: 860191078}
   _leftWing: {fileID: 232085222}
   _rightWing: {fileID: 967944221}
+  _thrusters: {fileID: 1221735234}
   _laser: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _explosion: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _powerUp: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!70 &157408646
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -337,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 157408644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 1354285826}
   - {fileID: 1221735235}
@@ -572,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f908a9c34107d44a54217237cad8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnRate: 2
   _enemyPref: {fileID: 8462013593891294588, guid: b598c1a6f1bca9d498c6eca0705c857e,
     type: 3}
   _spawnEnemy: {fileID: 2090593935}
@@ -669,7 +673,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -182437147
   m_SortingLayer: 2
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1212,7 +1216,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -182437147
   m_SortingLayer: 2
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1495,7 +1499,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1221735235}
   - component: {fileID: 1221735236}
-  - component: {fileID: 1221735237}
   m_Layer: 0
   m_Name: Thruster
   m_TagString: Untagged
@@ -1567,25 +1570,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1221735237
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221735234}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ed7c2799d0e22c94f8c5c7997156cc09, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1354285825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1659,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -182437147
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

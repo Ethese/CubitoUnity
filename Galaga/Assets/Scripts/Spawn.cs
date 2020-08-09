@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     [SerializeField]
+    private float _spawnRate;
+    [SerializeField]
     private GameObject _enemyPref;
     [SerializeField]
     private GameObject _spawnEnemy;
@@ -27,7 +29,7 @@ public class Spawn : MonoBehaviour
             Vector3 spawnPoint = new Vector3(Random.Range(-8f, 8f), 6.5f, 0);
             GameObject newEnemy = Instantiate(_enemyPref, spawnPoint, Quaternion.identity);
             newEnemy.transform.parent = _spawnEnemy.transform;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_spawnRate);
         }
     }
 

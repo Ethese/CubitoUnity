@@ -10,8 +10,15 @@ public class Enemigo : MonoBehaviour
     private Animator _anim;
     private CapsuleCollider2D _collider2D;
 
+    //Audio
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _explosion;
+
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _anim = gameObject.GetComponent<Animator>();
         _collider2D = gameObject.GetComponent<CapsuleCollider2D>();
     }
@@ -37,6 +44,8 @@ public class Enemigo : MonoBehaviour
                 pl.SistemaVidas();
                 _speed = 0;
                 _collider2D.enabled = false;
+                _audioSource.clip = _explosion;
+                _audioSource.Play(0);
                 _anim.SetTrigger("Explode");
                 Destroy(gameObject, 4f);
             }
@@ -48,6 +57,8 @@ public class Enemigo : MonoBehaviour
             Destroy(other.gameObject);
             _speed = 0;
             _collider2D.enabled = false;
+            _audioSource.clip = _explosion;
+            _audioSource.Play(0);
             _anim.SetTrigger("Explode");
             Destroy(gameObject, 4f);
         }

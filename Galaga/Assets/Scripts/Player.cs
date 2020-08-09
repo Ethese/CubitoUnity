@@ -50,12 +50,16 @@ public class Player : MonoBehaviour
 
     //Wings
     [SerializeField]
-    private GameObject _leftWing, _rightWing;
+    private GameObject _leftWing, _rightWing, _thrusters;
 
     //Audio
     private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _laser;
+    [SerializeField]
+    private AudioClip _explosion;
+    [SerializeField]
+    private AudioClip _powerUp;
 
     void Start()
     {
@@ -150,14 +154,15 @@ public class Player : MonoBehaviour
 
         if (_vidas <= 0)
         {
-            Destroy(gameObject);
-            _spawn.GetComponent<Spawn>().StopSpawn();
+            Death();
         }
     }
 
     public void ActivarTripleshot()
     {
         _isTripleshotActive = true;
+        _audioSource.clip = _powerUp;
+        _audioSource.Play(0);
         StartCoroutine(DesactivarTripleshot());
     }
 
@@ -169,6 +174,8 @@ public class Player : MonoBehaviour
 
     public void AumentarSpeed()
     {
+        _audioSource.clip = _powerUp;
+        _audioSource.Play(0);
         if (_speed < _maxSpeed)
         {
             _speed++;
@@ -187,9 +194,10 @@ public class Player : MonoBehaviour
 
     public void AumentarEscudo()
     {
-        Debug.Log(_cantidadEscudos);
         if (_cantidadEscudos < _cantidadMaximaEscudos)
         {
+            _audioSource.clip = _powerUp;
+            _audioSource.Play(0);
             _uIManager.AumentarEscudos(Mathf.RoundToInt(_cantidadEscudos));
             _cantidadEscudos++;
         }
@@ -206,5 +214,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Death()
+    {
+        _audioSource.clip = _explosion;
+        _audioSource.Play(0);
+        _thrusters.SetActive(false);
+        _leftWing.SetActive(false);
+        _rightWing.SetActive(false);
+        CapsuleCollider2D coll = GetComponent<CapsuleCollider2D>();
+        coll.enabled = false;
+        _speed = 0;
+        anim.SetTrigger("Explode");
+        Destroy(gameObject, 2.5f);
+        _spawn.GetComponent<Spawn>().StopSpawn();
+    }
 
 }
