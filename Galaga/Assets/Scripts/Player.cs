@@ -45,9 +45,25 @@ public class Player : MonoBehaviour
     [SerializeField]
     private UIManager _uIManager;
 
+    //Animations
+    private Animator anim;
+
+    //Wings
+    [SerializeField]
+    private GameObject _leftWing, _rightWing;
+
+    //Audio
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _laser;
+
     void Start()
     {
+        anim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         transform.position = new Vector3(0,0,0);
+        _leftWing.SetActive(false);
+        _rightWing.SetActive(false);
     }
 
     void Update()
@@ -71,6 +87,8 @@ public class Player : MonoBehaviour
             {
                 Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
             }
+            _audioSource.clip = _laser;
+            _audioSource.Play(0);
         }
     }
 
@@ -78,7 +96,7 @@ public class Player : MonoBehaviour
     {
         float inputHorizontal = Input.GetAxis("Horizontal");
         float inputVertical = Input.GetAxis("Vertical");
-
+        anim.SetInteger("Turn", Mathf.RoundToInt(inputHorizontal));
         Vector3 direccion = new Vector3(inputHorizontal, inputVertical, 0);
 
         transform.Translate(direccion * _speed * Time.deltaTime);
@@ -119,6 +137,16 @@ public class Player : MonoBehaviour
         _uIManager.ActualizarVidas(Mathf.RoundToInt(_vidas));
 
         Debug.Log(_vidas);
+
+        if (_vidas == 2)
+        {
+            _leftWing.SetActive(true);
+        }
+
+        if (_vidas == 1)
+        {
+            _rightWing.SetActive(true);
+        }
 
         if (_vidas <= 0)
         {

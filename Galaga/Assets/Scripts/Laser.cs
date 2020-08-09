@@ -5,8 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     //Velocidad
-    [SerializeField]
-    private float _speed = 5f;
+    private float _speed = 15f;
 
     void Update()
     {
